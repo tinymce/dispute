@@ -23,10 +23,10 @@ export const tString = testable(eqString, pprintString);
 
 export const tNumber = testable(eqNumber, pprintNumber);
 
-export const tArray = <A> (ta: Testable<A>): Testable<A[]> =>
+export const tArray = <A> (ta: Testable<A>): Testable<ArrayLike<A>> =>
   testable(eqArray(ta), pprintArray(ta));
 
-export const tArray_ = <A> (eqA: Eq<A>, PprintA: Pprint<A>): Testable<A[]> =>
+export const tArray_ = <A> (eqA: Eq<A>, PprintA: Pprint<A>): Testable<ArrayLike<A>> =>
   testable(eqArray(eqA), pprintArray(PprintA));
 
 export const tRecord = <A> (ta: Testable<A>): Testable<Record<string, A>> =>

@@ -1,4 +1,4 @@
-export const map = <A, B>(xs: A[], f: (a: A) => B): B[] => {
+export const map = <A, B>(xs: ArrayLike<A>, f: (a: A) => B): B[] => {
   const len = xs.length;
   const r = new Array(len);
   for (let i = 0; i < len; i++) {
@@ -9,7 +9,7 @@ export const map = <A, B>(xs: A[], f: (a: A) => B): B[] => {
 };
 
 /** map a function over an array, then map another function over every item except the last */
-export const mapDelimit = <A, B> (xs: A[], f: (a: A) => B, delimit: (b: B) => B): B[] => {
+export const mapDelimit = <A, B> (xs: ArrayLike<A>, f: (a: A) => B, delimit: (b: B) => B): B[] => {
   const len = xs.length;
   const r = new Array(len);
   for (let i = 0; i < len - 1; i++) {

@@ -39,9 +39,9 @@ export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<A[]> => pprint((xs) 
 export const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => pprint((r) => {
   const tuples = ObjectUtil.toTuples(r);
 
-  const cnode = (t: {k: string, v: A}) => {
-    const pv = pprintA.pprint(t.v);
-    const start = StringUtil.doubleQuote(t.k) + ': ';
+  const cnode: (t: [string, A]) => Pnode = ([k, v]) => {
+    const pv = pprintA.pprint(v);
+    const start = StringUtil.doubleQuote(k) + ': ';
     return Pnode.prependStart(start)(pv);
   };
 

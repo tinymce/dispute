@@ -33,10 +33,10 @@ export const showString: Show<string> = show((x) => singleQuote(x));
 
 export const showFunction: Show<Function> = showConst('function() {...}');
 
-export const showArray = <A> (showA: Show<A>): Show<A[]> => show((xs) =>
+export const showArray = <A> (showA: Show<A>): Show<ArrayLike<A>> => show((xs) =>
   '[' + ArrayUtil.map(xs, showA.show).join(', ') + ']'
 );
 
 export const showRecord = <A> (showA: Show<A>): Show<Record<string, A>> => show((rec) =>
-  '{' + ObjectUtil.toTuples(rec).map(({k, v}) => doubleQuote(k) + ': ' + showA.show(v)).join(', ') + '}'
+  '{' + ObjectUtil.toTuples(rec).map(([k, v]) => doubleQuote(k) + ': ' + showA.show(v)).join(', ') + '}'
 );

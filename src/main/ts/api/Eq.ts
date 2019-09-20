@@ -23,7 +23,7 @@ export const eqUndefined: Eq<undefined> = tripleEq;
 
 export const eqNull: Eq<null> = tripleEq;
 
-export const eqArray = <A> (eqa: Eq<A>): Eq<Array<A>> => eq((x, y) => {
+export const eqArray = <A> (eqa: Eq<A>): Eq<ArrayLike<A>> => eq((x, y) => {
   if (x.length !== y.length) return false;
   for (let i = 0, len = x.length; i < len; i++) {
     if (!eqa.eq(x[i], y[i])) {
