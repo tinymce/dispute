@@ -15,41 +15,28 @@ export interface Show<A> {
 export const show = <A> (show: (a: A) => string): Show<A> =>
   ({ show });
 
-const showConst = (s: string): Show<any> => show(() => s);
+export const showConst = (s: string): Show<any> => show(() => s);
 
-const showStringCtor: Show<any> = show<any>((x) => String(x));
+export const showStringCtor: Show<any> = show<any>((x) => String(x));
 
-const showJsonStringify: Show<any> = show<any>((x) => JSON.stringify(x));
+export const showJsonStringify: Show<any> = show<any>((x) => JSON.stringify(x));
 
-const showUndefined: Show<undefined> = showConst('undefined');
+export const showUndefined: Show<undefined> = showConst('undefined');
 
-const showNull: Show<undefined> = showConst('null');
+export const showNull: Show<undefined> = showConst('null');
 
-const showBoolean: Show<boolean> = showStringCtor;
+export const showBoolean: Show<boolean> = showStringCtor;
 
-const showNumber: Show<number> = showStringCtor;
+export const showNumber: Show<number> = showStringCtor;
 
-const showString: Show<string> = show((x) => singleQuote(x));
+export const showString: Show<string> = show((x) => singleQuote(x));
 
-const showFunction: Show<Function> = showConst('function() {...}');
+export const showFunction: Show<Function> = showConst('function() {...}');
 
-const showArray = <A> (showA: Show<A>): Show<A[]> => show((xs) =>
+export const showArray = <A> (showA: Show<A>): Show<A[]> => show((xs) =>
   '[' + ArrayUtil.map(xs, showA.show).join(', ') + ']'
 );
 
-const showRecord = <A> (showA: Show<A>): Show<Record<string, A>> => show((rec) =>
+export const showRecord = <A> (showA: Show<A>): Show<Record<string, A>> => show((rec) =>
   '{' + ObjectUtil.toTuples(rec).map(({k, v}) => doubleQuote(k) + ': ' + showA.show(v)).join(', ') + '}'
 );
-
-export const Show = {
-  showStringCtor,
-  showJsonStringify,
-  showUndefined,
-  showNull,
-  showBoolean,
-  showString,
-  showNumber,
-  showArray,
-  showRecord,
-  showFunction
-};

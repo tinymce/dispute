@@ -1,10 +1,7 @@
-import { Pprint } from '../../main/ts/api/Pprint';
-import { Pnode } from '../../main/ts/api/Pnode';
+import { pprintNumber, pprintArray, pprintString, render, pprint, Pprint } from '../../main/ts/api/Pprint';
+import { single, pnode } from '../../main/ts/api/Pnode';
 
 import { assert } from 'chai';
-
-const {pprintNumber, pprintArray, pprintString, render, pprint} = Pprint;
-const {single, pnode} = Pnode;
 
 interface Some<T> {
   'kind': 'some',

@@ -1,8 +1,7 @@
-import { Pprint } from '../../main/ts/api/Pprint';
+import { pprintNumber, pprintNull, pprintString, render, pprintUndefined, Pprint } from '../../main/ts/api/Pprint';
 
 import { assert } from 'chai';
 
-const { pprintNumber, pprintNull, pprintString, render, pprintUndefined } = Pprint;
 
 describe('pprintNumber', () => {
   it('renders', () => {

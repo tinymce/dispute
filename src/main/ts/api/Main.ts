@@ -1,7 +1,7 @@
-import { Eq } from './Eq';
-import { Show } from './Show';
-import { Testable } from './Testable';
-import { Pnode } from './Pnode';
-import { Pprint } from './Pprint';
+import * as Eq from './Eq';
+import * as Show from './Show';
+import * as Testable from './Testable';
+import * as Pnode from './Pnode';
+import * as Pprint from './Pprint';
 
 export { Eq, Show, Testable, Pnode, Pprint };

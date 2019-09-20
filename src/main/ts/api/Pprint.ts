@@ -1,39 +1,42 @@
-import { Show } from './Show';
+import * as Show from './Show';
 import * as ArrayUtil from '../core/ArrayUtil';
 import * as ObjectUtil from '../core/ObjectUtil';
 import * as StringUtil from '../core/StringUtil';
 import * as Type from '../core/Type';
-import { Pnode } from './Pnode';
+import * as Pnode from './Pnode';
+
+type Pnode = Pnode.Pnode;
+type Show<A> = Show.Show<A>;
 
 export interface Pprint<A> {
   pprint: (a: A) => Pnode
 }
 
-const pprint = <A> (pprint: (a: A) => Pnode): Pprint<A> => ({pprint});
+export const pprint = <A> (pprint: (a: A) => Pnode): Pprint<A> => ({pprint});
 
-const render = <A> (a: A, pprint: Pprint<A>): string => {
+export const render = <A> (a: A, pprint: Pprint<A>): string => {
   const n = pprint.pprint(a);
   return Pnode.render(n);
 };
 
-const pprintShow = <A> (show: Show<A>): Pprint<A> =>
+export const pprintShow = <A> (show: Show<A>): Pprint<A> =>
   pprint((a) => Pnode.single(show.show(a)));
 
-const pprintUndefined: Pprint<undefined> = pprintShow(Show.showUndefined);
-const pprintNull: Pprint<undefined> = pprintShow(Show.showNull);
-const pprintString: Pprint<string> = pprintShow(Show.showString);
-const pprintBoolean: Pprint<boolean> = pprintShow(Show.showBoolean);
-const pprintNumber: Pprint<number> = pprintShow(Show.showNumber);
-const pprintFunction: Pprint<Function> = pprintShow(Show.showFunction);
-const pprintStringCtor: Pprint<any> = pprintShow(Show.showStringCtor);
-const pprintJsonStringify: Pprint<any> = pprintShow(Show.showJsonStringify);
+export const pprintUndefined: Pprint<undefined> = pprintShow(Show.showUndefined);
+export const pprintNull: Pprint<undefined> = pprintShow(Show.showNull);
+export const pprintString: Pprint<string> = pprintShow(Show.showString);
+export const pprintBoolean: Pprint<boolean> = pprintShow(Show.showBoolean);
+export const pprintNumber: Pprint<number> = pprintShow(Show.showNumber);
+export const pprintFunction: Pprint<Function> = pprintShow(Show.showFunction);
+export const pprintStringCtor: Pprint<any> = pprintShow(Show.showStringCtor);
+export const pprintJsonStringify: Pprint<any> = pprintShow(Show.showJsonStringify);
 
-const pprintArray = <A> (pprintA: Pprint<A>): Pprint<A[]> => pprint((xs) => {
+export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<A[]> => pprint((xs) => {
   const c = ArrayUtil.mapDelimit(xs, pprintA.pprint, Pnode.appendEnd(','));
   return Pnode.pnode('[', c, ']');
 });
 
-const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => pprint((r) => {
+export const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => pprint((r) => {
   const tuples = ObjectUtil.toTuples(r);
 
   const cnode = (t: {k: string, v: A}) => {
@@ -46,7 +49,7 @@ const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => ppri
   return Pnode.pnode('{', c, '}');
 });
 
-const pprintAny: Pprint<any> = pprint((a) => {
+export const pprintAny: Pprint<any> = pprint((a) => {
   if (Type.isUndefined(a)) {
     return pprintUndefined.pprint(a);
   } else if (Type.isNull(a)) {
@@ -67,18 +70,3 @@ const pprintAny: Pprint<any> = pprint((a) => {
     return pprintStringCtor.pprint(a);
   }
 });
-
-export const Pprint = {
-  pprint,
-  render,
-  pprintShow,
-  pprintUndefined,
-  pprintNull,
-  pprintString,
-  pprintBoolean,
-  pprintNumber,
-  pprintArray,
-  pprintRecord,
-  pprintAny,
-  pprintJsonStringify
-};

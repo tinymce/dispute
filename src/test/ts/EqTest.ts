@@ -1,7 +1,5 @@
-import { Eq } from '../../main/ts/api/Eq';
-import { assert } from 'chai';
-
-const { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } = Eq;
+import { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } from '../../main/ts/api/Eq';
+import { assert } from 'chai'
 
 describe('eqNull', () => {
   it('eqs', () => {
