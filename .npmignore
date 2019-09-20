@@ -1,0 +1,9 @@
+.DS_Store
+*~
+*.iws
+*.sublime-*
+/.vscode
+/*.log
+/scratch
+/src/demo
+/src/test

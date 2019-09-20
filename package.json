@@ -1,0 +1,28 @@
+{
+  "name": "@ephox/dispute",
+  "version": "1.1.0",
+  "description": "Basic typeclasses useful for comparison and testing: Eq, Show, Pprint",
+  "main": "./lib/main/ts/api//Main.js",
+  "module": "./lib/main/ts/api//Main.js",
+  "scripts": {
+    "prepublishOnly": "tsc",
+    "build": "tsc",
+    "test": "tsc && mocha -r esm lib/test/**/*Test.js"
+  },
+  "author": "Ephox Corporation",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "files": [
+    "lib/**",
+    "src/**"
+  ]
+}
