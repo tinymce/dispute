@@ -1,5 +1,5 @@
 import { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } from '../../main/ts/api/Eq';
-import { assert } from 'chai'
+import { assert } from 'chai';
 import * as fc from 'fast-check';
 
 describe('eqNull', () => {
@@ -109,7 +109,7 @@ describe('contramap', () => {
   it('contramaps', () => {
     type Numbo = {
       x: number;
-    }
+    };
     const eqNumbo = contramap<number, Numbo>(eqNumber, (n) => n.x);
 
     const arb = fc.integer().map((x) => ({x}));
@@ -118,5 +118,5 @@ describe('contramap', () => {
 
     assert.strictEqual(eqNumbo.eq({x: 3}, {x: 3}), true);
     assert.strictEqual(eqNumbo.eq({x: 3}, {x: 4}), false);
-  })
+  });
 });

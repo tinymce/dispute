@@ -18,13 +18,13 @@ describe('pprintAny', () => {
   it('renders strings', () => {
     assert.strictEqual(
       render('hello', pprintAny),
-      "'hello'"
+      '\'hello\''
     );
   });
 
   it('renders objects', () => {
     assert.strictEqual(
-      render({a: 3, b: [7, function() { throw new Error(); }]}, pprintAny),
+      render({a: 3, b: [7, function () { throw new Error(); }]}, pprintAny),
       [
         '{',
         '  "a": 3,',
@@ -54,5 +54,5 @@ describe('pprintAny', () => {
         '}'
       ].join('\n')
     );
-  })
+  });
 });

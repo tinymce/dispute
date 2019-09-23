@@ -27,4 +27,4 @@ export const isFunction = <(value: any) => value is Function> isType('function')
 export const isNumber = <(value: any) => value is number> isType('number');
 
 export const isEquatableType = (x: string): boolean =>
-  [ 'undefined', 'boolean', 'number', 'string', 'function', 'xml', 'null' ].indexOf(x) != -1;
+  [ 'undefined', 'boolean', 'number', 'string', 'function', 'xml', 'null' ].indexOf(x) !== -1;

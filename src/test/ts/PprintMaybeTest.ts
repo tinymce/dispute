@@ -4,12 +4,12 @@ import { single, pnode } from '../../main/ts/api/Pnode';
 import { assert } from 'chai';
 
 interface Some<T> {
-  'kind': 'some',
-  value: T
+  'kind': 'some';
+  value: T;
 }
 
 interface None<T> {
-  'kind': 'none'
+  'kind': 'none';
 }
 
 type Maybe<T> = Some<T> | None<T>;
@@ -20,7 +20,7 @@ const some = <A>(value: A): Maybe<A> => ({
 });
 
 const none = <A>(): Maybe<A> => ({
-  'kind': 'none'
+  kind: 'none'
 });
 
 const pprintMaybe = <A>(pprintA: Pprint<A>): Pprint<Maybe<A>> => pprint((oa) => {

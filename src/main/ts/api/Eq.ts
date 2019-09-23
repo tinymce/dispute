@@ -8,8 +8,8 @@ export interface Eq<A> {
 export const contramap = <A, B> (eqa: Eq<A>, f: (b: B) => A): Eq<B> =>
   eq((x, y) => eqa.eq(f(x), f(y)));
 
-export const eq = <A> (eq: (x: A, y: A) => boolean): Eq<A> =>
-  ({ eq });
+export const eq = <A> (f: (x: A, y: A) => boolean): Eq<A> =>
+  ({ eq: f });
 
 export const tripleEq: Eq<any> = eq((x, y) => x === y);
 
@@ -24,8 +24,9 @@ export const eqUndefined: Eq<undefined> = tripleEq;
 export const eqNull: Eq<null> = tripleEq;
 
 export const eqArray = <A> (eqa: Eq<A>): Eq<ArrayLike<A>> => eq((x, y) => {
-  if (x.length !== y.length) return false;
-  for (let i = 0, len = x.length; i < len; i++) {
+  if (x.length !== y.length) { return false; }
+  const len = x.length;
+  for (let i = 0; i < len; i++) {
     if (!eqa.eq(x[i], y[i])) {
       return false;
     }
@@ -39,7 +40,8 @@ export const eqRecord = <A> (eqa: Eq<A>): Eq<Record<string, A>> => eq((x, y) => 
   if (!eqArray(eqString).eq(kx, ky)) {
     return false;
   }
-  for (let i = 0, len = kx.length; i < len; i++) {
+  const len = kx.length;
+  for (let i = 0; i < len; i++) {
     const q = kx[i];
     if (!eqa.eq(x[q], y[q])) {
       return false;
@@ -49,11 +51,11 @@ export const eqRecord = <A> (eqa: Eq<A>): Eq<Record<string, A>> => eq((x, y) => 
 });
 
 export const eqAny: Eq<any> = eq((x, y) => {
-  if (x === y) return true;
+  if (x === y) { return true; }
 
   const tx = Type.typeOf(x);
   const ty = Type.typeOf(y);
-  if (tx !== ty) return false;
+  if (tx !== ty) { return false; }
 
   if (Type.isEquatableType(tx)) {
     return x === y;

@@ -9,11 +9,11 @@ import { singleQuote, doubleQuote } from '../core/StringUtil';
  *  So, showString.show("abc") = "'abc'" *not* "abc"
  */
 export interface Show<A> {
-  show: (a: A) => string
+  show: (a: A) => string;
 }
 
-export const show = <A> (show: (a: A) => string): Show<A> =>
-  ({ show });
+export const show = <A> (f: (a: A) => string): Show<A> =>
+  ({ show: f });
 
 export const showConst = (s: string): Show<any> => show(() => s);
 

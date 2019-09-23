@@ -9,13 +9,13 @@ type Pnode = Pnode.Pnode;
 type Show<A> = Show.Show<A>;
 
 export interface Pprint<A> {
-  pprint: (a: A) => Pnode
+  pprint: (a: A) => Pnode;
 }
 
-export const pprint = <A> (pprint: (a: A) => Pnode): Pprint<A> => ({pprint});
+export const pprint = <A> (f: (a: A) => Pnode): Pprint<A> => ({pprint: f});
 
-export const render = <A> (a: A, pprint: Pprint<A>): string => {
-  const n = pprint.pprint(a);
+export const render = <A> (a: A, pp: Pprint<A>): string => {
+  const n = pp.pprint(a);
   return Pnode.render(n);
 };
 
