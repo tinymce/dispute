@@ -23,7 +23,7 @@ export const showJsonStringify: Show<any> = show((x) => JSON.stringify(x));
 
 export const showUndefined: Show<undefined> = showConst('undefined');
 
-export const showNull: Show<undefined> = showConst('null');
+export const showNull: Show<null> = showConst('null');
 
 export const showBoolean: Show<boolean> = showStringCtor;
 

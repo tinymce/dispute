@@ -1,7 +1,5 @@
-import * as ArrayUtil from './ArrayUtil';
-
-export const singleQuote = (x) => "'" + x.replace(/'/g, "\\'") + "'";
-export const doubleQuote = (x) => '"' + x.replace(/"/g, '\\"') + '"';
+export const singleQuote = (x: string): string => "'" + x.replace(/'/g, "\\'") + "'";
+export const doubleQuote = (x: string): string => '"' + x.replace(/"/g, '\\"') + '"';
 
 export const repeat = (n: number, s: string): string => {
   let r = '';

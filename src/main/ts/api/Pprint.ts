@@ -23,7 +23,7 @@ export const pprintShow = <A> (show: Show<A>): Pprint<A> =>
   pprint((a) => Pnode.single(show.show(a)));
 
 export const pprintUndefined: Pprint<undefined> = pprintShow(Show.showUndefined);
-export const pprintNull: Pprint<undefined> = pprintShow(Show.showNull);
+export const pprintNull: Pprint<null> = pprintShow(Show.showNull);
 export const pprintString: Pprint<string> = pprintShow(Show.showString);
 export const pprintBoolean: Pprint<boolean> = pprintShow(Show.showBoolean);
 export const pprintNumber: Pprint<number> = pprintShow(Show.showNumber);
@@ -31,7 +31,7 @@ export const pprintFunction: Pprint<Function> = pprintShow(Show.showFunction);
 export const pprintStringCtor: Pprint<any> = pprintShow(Show.showStringCtor);
 export const pprintJsonStringify: Pprint<any> = pprintShow(Show.showJsonStringify);
 
-export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<A[]> => pprint((xs) => {
+export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<ArrayLike<A>> => pprint((xs) => {
   const c = ArrayUtil.mapDelimit(xs, pprintA.pprint, Pnode.appendEnd(','));
   return Pnode.pnode('[', c, ']');
 });

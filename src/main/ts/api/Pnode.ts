@@ -29,7 +29,7 @@ export const prependStart = (s: string): (p: Pnode) => Pnode => modStart((start)
 
 export const appendEnd = (s: string): (p: Pnode) => Pnode => modEnd((end) => end + s);
 
-const doRender = (level: number, n: Pnode) => {
+const doRender = (level: number, n: Pnode): string => {
   const ind = StringUtil.repeat(level, '  ');
 
   if (n.children.length === 0) {
