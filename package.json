@@ -11,7 +11,9 @@
   },
   "author": "Ephox Corporation",
   "license": "Apache-2.0",
-  "dependencies": {},
+  "dependencies": {
+    "fast-check": "^1.16.3"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.3",
     "@types/mocha": "^5.2.7",
