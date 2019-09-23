@@ -17,9 +17,9 @@ export const show = <A> (show: (a: A) => string): Show<A> =>
 
 export const showConst = (s: string): Show<any> => show(() => s);
 
-export const showStringCtor: Show<any> = show<any>((x) => String(x));
+export const showStringCtor: Show<any> = show((x) => String(x));
 
-export const showJsonStringify: Show<any> = show<any>((x) => JSON.stringify(x));
+export const showJsonStringify: Show<any> = show((x) => JSON.stringify(x));
 
 export const showUndefined: Show<undefined> = showConst('undefined');
 
