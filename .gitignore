@@ -1,0 +1,6 @@
+/lib
+/scratch
+/src/main/ts/**/*.js
+/.idea
+/node_modules
+/yarn-error.log

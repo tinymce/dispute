@@ -1,0 +1,26 @@
+import { Eq, eqUndefined, eqNull, eqString, eqNumber, eqArray, eqRecord, eqAny } from './Eq';
+import { Pprint, pprintUndefined, pprintNull, pprintString, pprintNumber, pprintArray, pprintRecord, pprintJsonStringify } from './Pprint';
+
+/** To test a type, you should be able to compare 2 values and print them out. */
+export interface Testable<A> extends Eq<A>, Pprint<A> {}
+
+export const testable = <A> (eqA: Eq<A>, pprintA: Pprint<A>) => ({
+  ...eqA,
+  ...pprintA
+});
+
+export const tUndefined = testable(eqUndefined, pprintUndefined);
+
+export const tNull = testable(eqNull, pprintNull);
+
+export const tString = testable(eqString, pprintString);
+
+export const tNumber = testable(eqNumber, pprintNumber);
+
+export const tArray = <A> (ta: Testable<A>): Testable<ArrayLike<A>> =>
+  testable(eqArray(ta), pprintArray(ta));
+
+export const tRecord = <A> (ta: Testable<A>): Testable<Record<string, A>> =>
+  testable(eqRecord(ta), pprintRecord(ta));
+
+export const tDeepAny = testable(eqAny, pprintJsonStringify);
