@@ -2,7 +2,6 @@ import { pprintNumber, pprintNull, pprintString, render, pprintUndefined, Pprint
 
 import { assert } from 'chai';
 
-
 describe('pprintNumber', () => {
   it('renders', () => {
     assert.strictEqual('3', render(3, pprintNumber));
