@@ -1,11 +1,5 @@
-import * as Eq from './Eq';
-import * as Pprint from './Pprint';
-
-const { pprintUndefined, pprintNull, pprintString, pprintNumber, pprintArray, pprintRecord, pprintJsonStringify } = Pprint;
-const { eqUndefined, eqNull, eqString, eqNumber, eqArray, eqRecord, eqAny } = Eq;
-
-type Eq<A> = Eq.Eq<A>;
-type Pprint<A> = Pprint.Pprint<A>;
+import { Eq, eqUndefined, eqNull, eqString, eqNumber, eqArray, eqRecord, eqAny } from './Eq';
+import { Pprint, pprintUndefined, pprintNull, pprintString, pprintNumber, pprintArray, pprintRecord, pprintJsonStringify } from './Pprint';
 
 /** To test a type, you should be able to compare 2 values and print them out. */
 export interface Testable<A> extends Eq<A>, Pprint<A> {}
