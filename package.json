@@ -11,6 +11,7 @@
   },
   "author": "Ephox Corporation",
   "license": "Apache-2.0",
+  "private": false,
   "dependencies": {
     "fast-check": "^1.16.3"
   },
@@ -29,7 +30,6 @@
     "lib/**",
     "src/**"
   ],
-  "private": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   }
