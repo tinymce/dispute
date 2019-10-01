@@ -1,6 +1,6 @@
 {
   "name": "@ephox/dispute",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic typeclasses useful for comparison and testing: Eq, Show, Pprint",
   "main": "./lib/main/ts/api/Main.js",
   "module": "./lib/main/ts/api/Main.js",
