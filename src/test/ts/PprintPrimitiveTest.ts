@@ -11,8 +11,9 @@ describe('pprintNumber', () => {
 
 describe('string', () => {
   it('renders', () => {
-    assert.strictEqual('\'a\'', render('a', pprintString));
-    assert.strictEqual('\'a\\\'b\'', render('a\'b', pprintString));
+    assert.strictEqual('"a"', render('a', pprintString));
+    assert.strictEqual('"a\'b"', render('a\'b', pprintString));
+    assert.strictEqual('"a\\\"b"', render('a"b', pprintString));
   });
 });
 

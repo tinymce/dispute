@@ -40,7 +40,7 @@ describe('pprintMaybe', () => {
       'Some(\n' +
       '  [\n' +
       '    Some(\n' +
-      '      \'a\'\n' +
+      '      "a"\n' +
       '    )\n' +
       '  ]\n' +
       ')'

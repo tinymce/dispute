@@ -18,7 +18,7 @@ describe('pprintAny', () => {
   it('renders strings', () => {
     assert.strictEqual(
       render('hello', pprintAny),
-      '\'hello\''
+      '"hello"'
     );
   });
 
