@@ -29,7 +29,7 @@ export const showBoolean: Show<boolean> = showStringCtor;
 
 export const showNumber: Show<number> = showStringCtor;
 
-export const showString: Show<string> = show((x) => singleQuote(x));
+export const showString: Show<string> = show((x) => doubleQuote(x));
 
 export const showFunction: Show<Function> = showConst('function() {...}');
 
