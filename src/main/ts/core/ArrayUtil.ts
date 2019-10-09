@@ -22,3 +22,8 @@ export const mapDelimit = <A, B> (xs: ArrayLike<A>, f: (a: A) => B, delimit: (b:
 
   return r;
 };
+
+export const sort = <A> (xs: ArrayLike<A>, compareFn?: (a: A, b: A) => number): A[] => {
+  const clone: A[] = Array.prototype.slice.call(xs);
+  return clone.sort(compareFn);
+};

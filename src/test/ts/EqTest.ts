@@ -67,6 +67,13 @@ describe('eqRecord', () => {
     assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({a: [1, 7]}, {a: [1, 9]}), false);
     assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({a: [1, 7]}, {a: [1, 7]}), true);
   });
+
+  it('eqs with different key order', () => {
+    assert.strictEqual(eqRecord(eqString).eq(
+      {a: 'cat', b: 'dog'},
+      {b: 'dog', a: 'cat'}
+    ), true);
+  });
 });
 
 describe('eqAny', () => {
@@ -102,6 +109,13 @@ describe('eqAny', () => {
     assert.strictEqual(eqAny.eq([[[0]]], [[[0]]]), true);
     assert.strictEqual(eqAny.eq(['cat', {x: 3}, 0, null, undefined], ['cat', {x: 3}, 0, null, undefined]), true);
     assert.strictEqual(eqAny.eq(['cat', {x: 3, y: 8}, 0, null, undefined], ['cat', {x: 3}, 0, null, undefined]), false);
+  });
+
+  it('eqs with different key order', () => {
+    assert.strictEqual(eqAny.eq(
+      {a: 'cat', b: 'dog'},
+      {b: 'dog', a: 'cat'}
+    ), true);
   });
 });
 
