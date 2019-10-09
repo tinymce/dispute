@@ -1,4 +1,5 @@
 import * as Type from '../core/Type';
+import * as ArrayUtil from '../core/ArrayUtil';
 
 /** A way of comparing two values of the same type for equality. */
 export interface Eq<A> {
@@ -34,10 +35,14 @@ export const eqArray = <A> (eqa: Eq<A>): Eq<ArrayLike<A>> => eq((x, y) => {
   return true;
 });
 
+// TODO: Make an Ord typeclass
+const eqSortedArray = <A>(eqa: Eq<A>, compareFn?: (a: A, b: A) => number): Eq<ArrayLike<A>> =>
+  contramap(eqArray(eqa), (xs) => ArrayUtil.sort(xs, compareFn));
+
 export const eqRecord = <A> (eqa: Eq<A>): Eq<Record<string, A>> => eq((x, y) => {
   const kx = Object.keys(x);
   const ky = Object.keys(y);
-  if (!eqArray(eqString).eq(kx, ky)) {
+  if (!eqSortedArray(eqString).eq(kx, ky)) {
     return false;
   }
   const len = kx.length;
