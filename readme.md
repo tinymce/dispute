@@ -13,3 +13,4 @@ Testable is useful for test assertion libraries. You can use Dispute functionali
 Dispute provides instances for common TypeScript types, as well as for `any` types, using type inspection. 
 It is also extendable to types which can't be compared correctly with type inspection - e.g. church-encoded types.
 
+Dispute is used in the [Bedrock](https://github.com/tinymce/bedrock) test runner.
