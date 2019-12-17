@@ -1,7 +1,7 @@
 Dispute
 =======
 
-This library contains very basic type classes:
+This library contains the following basic [type classes](git@github.com:tinymce/dispute.git):
 
  - Eq - equality
  - Show - printing values as literals for debugging
