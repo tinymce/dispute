@@ -1,3 +1,6 @@
+Dispute
+=======
+
 This library contains very basic type classes:
 
  - Eq - equality
