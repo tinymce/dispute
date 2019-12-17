@@ -6,7 +6,7 @@ This library contains the following basic [type classes](git@github.com:tinymce/
  - Eq - equality
  - Show - printing values as literals for debugging
  - Pprint - pretty-printing values
- - Testable - Eq + Pprint
+ - Testable - Eq and Pprint
 
 Testable is useful for test assertion libraries. You can use Dispute functionality test that two values are equal, and if they're not, pretty-print the expected and actual.
 
