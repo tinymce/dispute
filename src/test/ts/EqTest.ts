@@ -78,8 +78,8 @@ describe('eqRecord', () => {
 
 describe('eqAny', () => {
   it('eqs', () => {
-    fc.assert(fc.property(fc.anything(), (x) => isNaN(x) || eqAny.eq(x, x)));
-    fc.assert(fc.property(fc.anything(), (x) => isNaN(x) || !eqAny.eq(x, {z: x})));
+    fc.assert(fc.property(fc.anything(), (x) => (typeof x === 'number' && isNaN(x)) || eqAny.eq(x, x)));
+    fc.assert(fc.property(fc.anything(), (x) => (typeof x === 'number' && isNaN(x)) || !eqAny.eq(x, {z: x})));
 
     assert.strictEqual(eqAny.eq(1, 1), true);
     assert.strictEqual(eqAny.eq(1, 2), false);
