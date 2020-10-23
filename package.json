@@ -8,7 +8,7 @@
     "prepublishOnly": "tsc",
     "lint": "tslint --project .",
     "build": "tsc",
-    "test": "yarn build && yarn lint && mocha -r esm --require ts-node/register --require source-map-support/register --recursive --reporter mocha-multi-reporters --reporter-options configFile=mocha-multi-reporters-config.json src/test/ts/**/*Test.ts"
+    "test": "yarn build && yarn lint && yarn mocha"
   },
   "author": "Ephox Corporation",
   "license": "Apache-2.0",
