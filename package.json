@@ -6,8 +6,9 @@
   "module": "./lib/main/ts/api/Main.js",
   "scripts": {
     "prepublishOnly": "tsc",
-    "build": "tsc && tslint --project .",
-    "test": "yarn build && mocha -r esm lib/test/**/*Test.js"
+    "lint": "tslint --project .",
+    "build": "tsc",
+    "test": "yarn build && yarn lint && yarn mocha"
   },
   "author": "Ephox Corporation",
   "license": "Apache-2.0",
@@ -15,6 +16,7 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
+  "type": "module",
   "devDependencies": {
     "@ephox/tslint-rules": "^1.0.11",
     "@types/chai": "^4.2.3",
@@ -23,6 +25,9 @@
     "esm": "^3.2.25",
     "fast-check": "^1.17.0",
     "mocha": "^6.2.0",
+    "mocha-junit-reporter": "^2.0.0",
+    "mocha-multi-reporters": "^1.1.7",
+    "source-map-support": "^0.5.19",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
