@@ -5,7 +5,7 @@ export const toTuples = <T> (obj: Record<string, T>): Array<[string, T]> => {
   for (let q = 0; q < len; q++) {
     const k = props[q];
     const v = obj[k];
-    r.push([k, v]);
+    r.push([ k, v ]);
   }
   return r;
 };

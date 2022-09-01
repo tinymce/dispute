@@ -10,7 +10,8 @@
     "outDir": "lib",
     "baseUrl": ".",
     "rootDir": "src",
-    "strict": true
+    "strict": true,
+    "noUnusedLocals": true
   },
   "include": [
     "src/main/ts",

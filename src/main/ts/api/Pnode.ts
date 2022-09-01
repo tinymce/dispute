@@ -13,11 +13,11 @@ export const pnode = (start: string, children: Pnode[], end: string): Pnode => (
 
 export const single = (s: string): Pnode => pnode(s, [], '');
 
-export const setStart = (start: string) => (p: Pnode): Pnode => ({...p, start});
+export const setStart = (start: string) => (p: Pnode): Pnode => ({ ...p, start });
 
-export const setChildren = (children: Pnode[]) => (p: Pnode): Pnode => ({...p, children});
+export const setChildren = (children: Pnode[]) => (p: Pnode): Pnode => ({ ...p, children });
 
-export const setEnd = (end: string) => (p: Pnode): Pnode => ({...p, end});
+export const setEnd = (end: string) => (p: Pnode): Pnode => ({ ...p, end });
 
 export const modStart = (f: (s: string) => string) => (p: Pnode): Pnode => setStart(f(p.start))(p);
 

@@ -1,4 +1,4 @@
-export const typeOf = function (x: any) {
+export const typeOf = (x: any) => {
   if (x === null) {
     return 'null';
   }
@@ -15,16 +15,16 @@ export const typeOf = function (x: any) {
   return t;
 };
 
-const isType = (type: string) => (value: any) => typeOf(value) === type;
+const isType = <T>(type: string) => (value: any): value is T => typeOf(value) === type;
 
-export const isString = <(value: any) => value is string> isType('string');
-export const isObject = isType('object');
-export const isArray = <(value: any) => value is Array<any>> isType('array');
-export const isNull = <(value: any) => value is null> isType('null');
-export const isBoolean = <(value: any) => value is boolean> isType('boolean');
-export const isUndefined = <(value: any) => value is undefined> isType('undefined');
-export const isFunction = <(value: any) => value is Function> isType('function');
-export const isNumber = <(value: any) => value is number> isType('number');
+export const isString = isType<string>('string');
+export const isObject = isType<Object>('object');
+export const isArray = isType<Array<unknown>>('array');
+export const isNull = isType<null>('null');
+export const isBoolean = isType<boolean>('boolean');
+export const isUndefined = isType<undefined>('undefined');
+export const isFunction = isType<Function>('function');
+export const isNumber = isType<number>('number');
 
 export const isEquatableType = (x: string): boolean =>
   [ 'undefined', 'boolean', 'number', 'string', 'function', 'xml', 'null' ].indexOf(x) !== -1;

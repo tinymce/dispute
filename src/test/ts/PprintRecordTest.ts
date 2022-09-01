@@ -1,6 +1,6 @@
-import { pprintNumber, pprintRecord, pprintArray, render } from '../../main/ts/api/Pprint';
-
 import { assert } from 'chai';
+
+import { pprintNumber, pprintRecord, pprintArray, render } from '../../main/ts/api/Pprint';
 
 describe('pprintRecord', () => {
   it('renders record of number', () => {
@@ -10,7 +10,7 @@ describe('pprintRecord', () => {
       '  "b": 7\n' +
       '}',
       render(
-        {a: 3, b: 7},
+        { a: 3, b: 7 },
         pprintRecord(pprintNumber)
       )
     );
@@ -20,7 +20,7 @@ describe('pprintRecord', () => {
       '  "a": 1.1\n' +
       '}',
       render(
-        {a: 1.1},
+        { a: 1.1 },
         pprintRecord(pprintNumber)
       )
     );
@@ -47,8 +47,8 @@ describe('string: number[]', () => {
       '  ]\n' +
       '}',
       render({
-        a: [3],
-        b: [4]
+        a: [ 3 ],
+        b: [ 4 ]
       }, pprintRecord(pprintArray(pprintNumber)))
     );
   });

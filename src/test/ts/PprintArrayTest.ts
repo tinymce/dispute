@@ -11,14 +11,14 @@ describe('Pprint', () => {
     );
 
     assert.strictEqual(
-      render([7], pprintArray(pprintNumber)),
+      render([ 7 ], pprintArray(pprintNumber)),
       '[\n' +
       '  7\n' +
       ']'
     );
 
     assert.strictEqual(
-      render([3, 4], pprintArray(pprintNumber)),
+      render([ 3, 4 ], pprintArray(pprintNumber)),
       '[\n' +
       '  3,\n' +
       '  4\n' +
@@ -28,7 +28,7 @@ describe('Pprint', () => {
 
   it('renders string[][]', () => {
     assert.strictEqual(
-      render([[3, 4]], pprintArray(pprintArray(pprintNumber))),
+      render([[ 3, 4 ]], pprintArray(pprintArray(pprintNumber))),
       '[\n' +
       '  [\n' +
       '    3,\n' +
@@ -50,7 +50,7 @@ describe('Pprint', () => {
     );
 
     assert.strictEqual(
-      render([[8]], pprintArray(pprintArray(pprintNumber))),
+      render([[ 8 ]], pprintArray(pprintArray(pprintNumber))),
       '[\n' +
       '  [\n' +
       '    8\n' +
@@ -59,7 +59,7 @@ describe('Pprint', () => {
     );
 
     assert.strictEqual(
-      render([[8], [1]], pprintArray(pprintArray(pprintNumber))),
+      render([[ 8 ], [ 1 ]], pprintArray(pprintArray(pprintNumber))),
       '[\n' +
       '  [\n' +
       '    8\n' +

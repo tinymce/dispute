@@ -24,7 +24,16 @@ describe('pprintAny', () => {
 
   it('renders objects', () => {
     assert.strictEqual(
-      render({a: 3, b: [7, function () { throw new Error(); }]}, pprintAny),
+      render({
+        a: 3,
+        b: [
+          7,
+          // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+          function () {
+            throw new Error();
+          }
+        ]
+      }, pprintAny),
       [
         '{',
         '  "a": 3,',
@@ -37,7 +46,7 @@ describe('pprintAny', () => {
     );
 
     assert.strictEqual(
-      render({a: [[3]], z: [true, {z: undefined}]}, pprintAny),
+      render({ a: [[ 3 ]], z: [ true, { z: undefined }] }, pprintAny),
       [
         '{',
         '  "a": [',
