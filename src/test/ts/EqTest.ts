@@ -1,6 +1,11 @@
-import { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } from '../../main/ts/api/Eq';
 import { assert } from 'chai';
 import * as fc from 'fast-check';
+
+import { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } from '../../main/ts/api/Eq';
+
+interface Numbo {
+  readonly x: number;
+}
 
 describe('eqNull', () => {
   it('eqs', () => {
@@ -40,8 +45,8 @@ describe('eqArrayNumber', () => {
     fc.assert(fc.property(fc.array(fc.integer()), (xs) => eqArray(eqNumber).eq(xs, xs)));
     fc.assert(fc.property(fc.array(fc.integer()), (xs) => eqArray(eqNumber).eq(xs, Array.prototype.slice.call(xs))));
     assert.strictEqual(eqArray(eqNumber).eq([], []), true);
-    assert.strictEqual(eqArray(eqNumber).eq([1], [1]), true);
-    assert.strictEqual(eqArray(eqNumber).eq([0], [1]), false);
+    assert.strictEqual(eqArray(eqNumber).eq([ 1 ], [ 1 ]), true);
+    assert.strictEqual(eqArray(eqNumber).eq([ 0 ], [ 1 ]), false);
   });
 });
 
@@ -52,26 +57,26 @@ describe('eqArrayArray', () => {
     assert.strictEqual(eqArray(eqArray(eqString)).eq([], []), true);
     assert.strictEqual(eqArray(eqArray(eqString)).eq([[]], [[]]), true);
     assert.strictEqual(eqArray(eqArray(eqString)).eq([[], []], [[], []]), true);
-    assert.strictEqual(eqArray(eqArray(eqString)).eq([['1'], []], [['1'], []]), true);
-    assert.strictEqual(eqArray(eqArray(eqString)).eq([[''], []], [[''], []]), true);
-    assert.strictEqual(eqArray(eqArray(eqString)).eq([[''], []], [['0'], []]), false);
+    assert.strictEqual(eqArray(eqArray(eqString)).eq([[ '1' ], []], [[ '1' ], []]), true);
+    assert.strictEqual(eqArray(eqArray(eqString)).eq([[ '' ], []], [[ '' ], []]), true);
+    assert.strictEqual(eqArray(eqArray(eqString)).eq([[ '' ], []], [[ '0' ], []]), false);
   });
 });
 
 describe('eqRecord', () => {
   it('eqs', () => {
     assert.strictEqual(eqRecord(eqString).eq({}, {}), true);
-    assert.strictEqual(eqRecord(eqString).eq({a: '3'}, {a: '3'}), true);
-    assert.strictEqual(eqRecord(eqString).eq({a: '3'}, {b: '3'}), false);
-    assert.strictEqual(eqRecord(eqString).eq({a: ''}, {a: 'f'}), false);
-    assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({a: [1, 7]}, {a: [1, 9]}), false);
-    assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({a: [1, 7]}, {a: [1, 7]}), true);
+    assert.strictEqual(eqRecord(eqString).eq({ a: '3' }, { a: '3' }), true);
+    assert.strictEqual(eqRecord(eqString).eq({ a: '3' }, { b: '3' }), false);
+    assert.strictEqual(eqRecord(eqString).eq({ a: '' }, { a: 'f' }), false);
+    assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({ a: [ 1, 7 ] }, { a: [ 1, 9 ] }), false);
+    assert.strictEqual(eqRecord(eqArray(eqNumber)).eq({ a: [ 1, 7 ] }, { a: [ 1, 7 ] }), true);
   });
 
   it('eqs with different key order', () => {
     assert.strictEqual(eqRecord(eqString).eq(
-      {a: 'cat', b: 'dog'},
-      {b: 'dog', a: 'cat'}
+      { a: 'cat', b: 'dog' },
+      { b: 'dog', a: 'cat' }
     ), true);
   });
 });
@@ -79,7 +84,7 @@ describe('eqRecord', () => {
 describe('eqAny', () => {
   it('eqs', () => {
     fc.assert(fc.property(fc.anything(), (x) => (typeof x === 'number' && isNaN(x)) || eqAny.eq(x, x)));
-    fc.assert(fc.property(fc.anything(), (x) => (typeof x === 'number' && isNaN(x)) || !eqAny.eq(x, {z: x})));
+    fc.assert(fc.property(fc.anything(), (x) => (typeof x === 'number' && isNaN(x)) || !eqAny.eq(x, { z: x })));
 
     assert.strictEqual(eqAny.eq(1, 1), true);
     assert.strictEqual(eqAny.eq(1, 2), false);
@@ -88,7 +93,7 @@ describe('eqAny', () => {
     assert.strictEqual(eqAny.eq(1, 'h'), false);
     assert.strictEqual(eqAny.eq(0, ''), false);
     assert.strictEqual(eqAny.eq(0, []), false);
-    assert.strictEqual(eqAny.eq(0, {a: 'b'}), false);
+    assert.strictEqual(eqAny.eq(0, { a: 'b' }), false);
     assert.strictEqual(eqAny.eq(0, () => {
       throw new Error();
     }), false);
@@ -100,37 +105,34 @@ describe('eqAny', () => {
     assert.strictEqual(eqAny.eq(undefined, ''), false);
     assert.strictEqual(eqAny.eq(undefined, []), false);
     assert.strictEqual(eqAny.eq(undefined, {}), false);
-    assert.strictEqual(eqAny.eq(undefined, {a: NaN}), false);
+    assert.strictEqual(eqAny.eq(undefined, { a: NaN }), false);
     assert.strictEqual(eqAny.eq(undefined, () => 3), false);
 
     assert.strictEqual(eqAny.eq([], []), true);
-    assert.strictEqual(eqAny.eq([0], [0]), true);
-    assert.strictEqual(eqAny.eq([[0]], [[0]]), true);
-    assert.strictEqual(eqAny.eq([[[0]]], [[[0]]]), true);
-    assert.strictEqual(eqAny.eq(['cat', {x: 3}, 0, null, undefined], ['cat', {x: 3}, 0, null, undefined]), true);
-    assert.strictEqual(eqAny.eq(['cat', {x: 3, y: 8}, 0, null, undefined], ['cat', {x: 3}, 0, null, undefined]), false);
+    assert.strictEqual(eqAny.eq([ 0 ], [ 0 ]), true);
+    assert.strictEqual(eqAny.eq([[ 0 ]], [[ 0 ]]), true);
+    assert.strictEqual(eqAny.eq([[[ 0 ]]], [[[ 0 ]]]), true);
+    assert.strictEqual(eqAny.eq([ 'cat', { x: 3 }, 0, null, undefined ], [ 'cat', { x: 3 }, 0, null, undefined ]), true);
+    assert.strictEqual(eqAny.eq([ 'cat', { x: 3, y: 8 }, 0, null, undefined ], [ 'cat', { x: 3 }, 0, null, undefined ]), false);
   });
 
   it('eqs with different key order', () => {
     assert.strictEqual(eqAny.eq(
-      {a: 'cat', b: 'dog'},
-      {b: 'dog', a: 'cat'}
+      { a: 'cat', b: 'dog' },
+      { b: 'dog', a: 'cat' }
     ), true);
   });
 });
 
 describe('contramap', () => {
   it('contramaps', () => {
-    type Numbo = {
-      x: number;
-    };
     const eqNumbo = contramap<number, Numbo>(eqNumber, (n) => n.x);
 
-    const arb = fc.integer().map((x) => ({x}));
+    const arb = fc.integer().map((x) => ({ x }));
 
-    fc.assert(fc.property(arb, (x) => eqNumbo.eq(x, ({x: x.x}))));
+    fc.assert(fc.property(arb, (x) => eqNumbo.eq(x, ({ x: x.x }))));
 
-    assert.strictEqual(eqNumbo.eq({x: 3}, {x: 3}), true);
-    assert.strictEqual(eqNumbo.eq({x: 3}, {x: 4}), false);
+    assert.strictEqual(eqNumbo.eq({ x: 3 }, { x: 3 }), true);
+    assert.strictEqual(eqNumbo.eq({ x: 3 }, { x: 4 }), false);
   });
 });

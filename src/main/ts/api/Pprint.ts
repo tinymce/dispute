@@ -12,7 +12,7 @@ export interface Pprint<A> {
   pprint: (a: A) => Pnode;
 }
 
-export const pprint = <A> (f: (a: A) => Pnode): Pprint<A> => ({pprint: f});
+export const pprint = <A> (f: (a: A) => Pnode): Pprint<A> => ({ pprint: f });
 
 export const render = <A> (a: A, pp: Pprint<A>): string => {
   const n = pp.pprint(a);
@@ -39,7 +39,7 @@ export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<ArrayLike<A>> => ppr
 export const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => pprint((r) => {
   const tuples = ObjectUtil.toTuples(r);
 
-  const cnode: (t: [string, A]) => Pnode = ([k, v]) => {
+  const cnode: (t: [string, A]) => Pnode = ([ k, v ]) => {
     const pv = pprintA.pprint(v);
     const start = StringUtil.doubleQuote(k) + ': ';
     return Pnode.prependStart(start)(pv);

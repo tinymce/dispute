@@ -1,10 +1,5 @@
 #!groovy
-@Library('waluigi@v3.3.0') _
+@Library('waluigi@v6.0.1') _
 
-standardProperties()
-
-node("primary") {
-  checkout scm
-  standardBuild()
-}
+beehiveFlowBuild()
 

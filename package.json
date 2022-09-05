@@ -1,14 +1,14 @@
 {
   "name": "@ephox/dispute",
-  "version": "1.0.14",
+  "version": "1.0.15-rc",
   "description": "Basic typeclasses useful for comparison and testing: Eq, Show, Pprint",
   "main": "./lib/main/ts/api/Main.js",
   "module": "./lib/main/ts/api/Main.js",
   "scripts": {
     "prepublishOnly": "tsc",
-    "lint": "tslint --project .",
+    "lint": "eslint 'src/**/*.ts'",
     "build": "tsc",
-    "test": "yarn build && yarn lint && yarn mocha"
+    "test": "yarn build && yarn mocha"
   },
   "author": "Ephox Corporation",
   "license": "Apache-2.0",
@@ -18,19 +18,19 @@
   },
   "type": "module",
   "devDependencies": {
-    "@ephox/tslint-rules": "^1.0.11",
-    "@types/chai": "^4.2.3",
-    "@types/mocha": "^5.2.7",
-    "chai": "^4.2.0",
+    "@tinymce/beehive-flow": "^0.18.0",
+    "@tinymce/eslint-plugin": "^2.2.0",
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^8.2.3",
+    "chai": "^4.3.6",
     "esm": "^3.2.25",
-    "fast-check": "^1.17.0",
-    "mocha": "^6.2.0",
-    "mocha-junit-reporter": "^2.0.0",
-    "mocha-multi-reporters": "^1.1.7",
-    "source-map-support": "^0.5.19",
+    "fast-check": "^2.0.0",
+    "mocha": "^8.4.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "mocha-multi-reporters": "^1.5.1",
+    "source-map-support": "^0.5.21",
     "ts-node": "^8.4.1",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "typescript": "^4.8.2"
   },
   "files": [
     "lib/**",

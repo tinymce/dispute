@@ -25,7 +25,9 @@ export const eqUndefined: Eq<undefined> = tripleEq;
 export const eqNull: Eq<null> = tripleEq;
 
 export const eqArray = <A> (eqa: Eq<A>): Eq<ArrayLike<A>> => eq((x, y) => {
-  if (x.length !== y.length) { return false; }
+  if (x.length !== y.length) {
+    return false;
+  }
   const len = x.length;
   for (let i = 0; i < len; i++) {
     if (!eqa.eq(x[i], y[i])) {
@@ -56,11 +58,15 @@ export const eqRecord = <A> (eqa: Eq<A>): Eq<Record<string, A>> => eq((x, y) => 
 });
 
 export const eqAny: Eq<any> = eq((x, y) => {
-  if (x === y) { return true; }
+  if (x === y) {
+    return true;
+  }
 
   const tx = Type.typeOf(x);
   const ty = Type.typeOf(y);
-  if (tx !== ty) { return false; }
+  if (tx !== ty) {
+    return false;
+  }
 
   if (Type.isEquatableType(tx)) {
     return x === y;

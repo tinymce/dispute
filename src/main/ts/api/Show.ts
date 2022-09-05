@@ -1,6 +1,6 @@
 import * as ArrayUtil from '../core/ArrayUtil';
 import * as ObjectUtil from '../core/ObjectUtil';
-import { singleQuote, doubleQuote } from '../core/StringUtil';
+import { doubleQuote } from '../core/StringUtil';
 
 /** Display the value as it would appear as a literal value in code.
  *  Useful for debug output.
@@ -38,5 +38,5 @@ export const showArray = <A> (showA: Show<A>): Show<ArrayLike<A>> => show((xs) =
 );
 
 export const showRecord = <A> (showA: Show<A>): Show<Record<string, A>> => show((rec) =>
-  '{' + ObjectUtil.toTuples(rec).map(([k, v]) => doubleQuote(k) + ': ' + showA.show(v)).join(', ') + '}'
+  '{' + ObjectUtil.toTuples(rec).map(([ k, v ]) => doubleQuote(k) + ': ' + showA.show(v)).join(', ') + '}'
 );
