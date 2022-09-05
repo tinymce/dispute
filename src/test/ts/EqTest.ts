@@ -3,6 +3,10 @@ import * as fc from 'fast-check';
 
 import { eqAny, eqNull, eqUndefined, eqNumber, eqString, eqArray, eqRecord, contramap } from '../../main/ts/api/Eq';
 
+interface Numbo {
+  readonly x: number;
+}
+
 describe('eqNull', () => {
   it('eqs', () => {
     assert.strictEqual(eqNull.eq(null, null), true);
@@ -122,9 +126,6 @@ describe('eqAny', () => {
 
 describe('contramap', () => {
   it('contramaps', () => {
-    interface Numbo {
-      x: number;
-    }
     const eqNumbo = contramap<number, Numbo>(eqNumber, (n) => n.x);
 
     const arb = fc.integer().map((x) => ({ x }));
