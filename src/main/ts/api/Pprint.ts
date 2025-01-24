@@ -1,12 +1,11 @@
 import * as Show from './Show';
+import { type Show as ShowType } from './Show';
 import * as ArrayUtil from '../core/ArrayUtil';
 import * as ObjectUtil from '../core/ObjectUtil';
 import * as StringUtil from '../core/StringUtil';
 import * as Type from '../core/Type';
 import * as Pnode from './Pnode';
-
-type PnodeType = Pnode.Pnode;
-type ShowType<A> = Show.Show<A>;
+import { type Pnode as PnodeType } from './Pnode';
 
 export interface Pprint<A> {
   pprint: (a: A) => PnodeType;
