@@ -1,25 +1,24 @@
 import * as Show from './Show';
+import { type Show as ShowType } from './Show';
 import * as ArrayUtil from '../core/ArrayUtil';
 import * as ObjectUtil from '../core/ObjectUtil';
 import * as StringUtil from '../core/StringUtil';
 import * as Type from '../core/Type';
 import * as Pnode from './Pnode';
-
-type Pnode = Pnode.Pnode;
-type Show<A> = Show.Show<A>;
+import { type Pnode as PnodeType } from './Pnode';
 
 export interface Pprint<A> {
-  pprint: (a: A) => Pnode;
+  pprint: (a: A) => PnodeType;
 }
 
-export const pprint = <A> (f: (a: A) => Pnode): Pprint<A> => ({ pprint: f });
+export const pprint = <A> (f: (a: A) => PnodeType): Pprint<A> => ({ pprint: f });
 
 export const render = <A> (a: A, pp: Pprint<A>): string => {
   const n = pp.pprint(a);
   return Pnode.render(n);
 };
 
-export const pprintShow = <A> (show: Show<A>): Pprint<A> =>
+export const pprintShow = <A> (show: ShowType<A>): Pprint<A> =>
   pprint((a) => Pnode.single(show.show(a)));
 
 export const pprintUndefined: Pprint<undefined> = pprintShow(Show.showUndefined);
@@ -39,7 +38,7 @@ export const pprintArray = <A> (pprintA: Pprint<A>): Pprint<ArrayLike<A>> => ppr
 export const pprintRecord = <A> (pprintA: Pprint<A>): Pprint<Record<string, A>> => pprint((r) => {
   const tuples = ObjectUtil.toTuples(r);
 
-  const cnode: (t: [string, A]) => Pnode = ([ k, v ]) => {
+  const cnode: (t: [string, A]) => PnodeType = ([ k, v ]) => {
     const pv = pprintA.pprint(v);
     const start = StringUtil.doubleQuote(k) + ': ';
     return Pnode.prependStart(start)(pv);
